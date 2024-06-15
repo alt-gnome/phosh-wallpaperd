@@ -1,0 +1,10 @@
+[Unit]
+Description=Phosh Wallpaper Daemon
+After=default.target
+
+[Service]
+ExecStart=@bindir@/ru.alt-gnome.phosh-wallpaperd
+Restart=always
+
+[Install]
+WantedBy=default.target

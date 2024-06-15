@@ -23,7 +23,6 @@ namespace PhoshWallpaperD {
     }
 
     public const string css_file_template = """
-
 /* This file generated automatically */
 
 phosh-app-grid {

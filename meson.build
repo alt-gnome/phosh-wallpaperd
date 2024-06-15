@@ -9,10 +9,12 @@ project(
 gnome = import('gnome')
 
 prefix = get_option('prefix')
+bindir = join_paths(prefix, get_option('bindir'))
 datadir = join_paths(prefix, get_option('datadir'))
 schemasdir = join_paths(datadir, 'glib-2.0/schemas')
 
 conf = configuration_data()
+conf.set('bindir', bindir)
 conf.set('datadir', datadir)
 
 gio = dependency('gio-2.0', version: '>= 2.72')

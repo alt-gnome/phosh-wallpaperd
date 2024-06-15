@@ -6,7 +6,8 @@ generated_schema = configure_file(
   configuration: conf,
 )
 
-install_data(generated_schema,
+install_data(
+  generated_schema,
   install_dir: join_paths(datadir, schemasdir)
 )
 
@@ -16,3 +17,16 @@ if compile_schemas.found()
   compile_schemas,
   args: ['--strict', '--dry-run', meson.current_source_dir()])
 endif
+
+service = 'ru.alt-gnome.phosh-wallpaperd.service'
+
+generated_service = configure_file(
+  output: service,
+  input: service + '.in',
+  configuration: conf,
+)
+
+install_data(
+  generated_service,
+  install_dir: '/etc/systemd/user'
+)

@@ -28,5 +28,5 @@ generated_service = configure_file(
 
 install_data(
   generated_service,
-  install_dir: join_paths('/', sysconfdir, 'systemd/user')
+  install_dir: join_paths('/lib/systemd/user')
 )

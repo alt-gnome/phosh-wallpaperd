@@ -11,7 +11,6 @@ gnome = import('gnome')
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))
 datadir = join_paths(prefix, get_option('datadir'))
-sysconfdir = get_option('sysconfdir')
 schemasdir = join_paths(datadir, 'glib-2.0/schemas')
 
 conf = configuration_data()

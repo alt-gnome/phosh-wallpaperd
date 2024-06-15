@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="phosh-wallpaperd">
+  <schema id="ru.alt-gnome.phosh-wallpaperd" path="/ru/alt-gnome/phosh-wallpaperd/">
+    <key name="lockscreen-picture-uri" type="s">
+      <default>'file://@datadir@/backgrounds/gnome/adwaita-l.jxl'</default>
+      <summary>Picture URI</summary>
+      <description>
+        URI to use for the locksreen image. Note that the backend only supports
+        local (file://) URIs.
+      </description>
+    </key>
+    <key name="lockscreen-picture-uri-dark" type="s">
+      <default>'file://@datadir@/backgrounds/gnome/adwaita-d.jxl'</default>
+      <summary>Picture URI (dark)</summary>
+      <description>
+        URI to use for the background image. Note that the backend only supports
+        local (file://) URIs.
+      </description>
+    </key>        
+  </schema>
+</schemalist>

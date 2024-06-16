@@ -8,7 +8,7 @@ generated_schema = configure_file(
 
 install_data(
   generated_schema,
-  install_dir: join_paths(datadir, schemasdir)
+  install_dir: schemasdir
 )
 
 compile_schemas = find_program('glib-compile-schemas', required: false)
@@ -28,5 +28,5 @@ generated_service = configure_file(
 
 install_data(
   generated_service,
-  install_dir: join_paths('/lib/systemd/user')
+  install_dir: join_paths(prefix, 'systemd/user')
 )

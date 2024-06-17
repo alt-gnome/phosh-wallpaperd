@@ -18,7 +18,7 @@ if compile_schemas.found()
   args: ['--strict', '--dry-run', meson.current_source_dir()])
 endif
 
-service = 'ru.alt-gnome.phosh-wallpaperd.service'
+service = 'phosh-wallpaperd.service'
 
 generated_service = configure_file(
   output: service,

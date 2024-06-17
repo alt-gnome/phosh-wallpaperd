@@ -48,7 +48,7 @@ public sealed class PhoshWallpaperD.CSSWriter: Object {
         );
     }
 
-    public void write_background_uri (string background_uri, string lockscreen_background_uri) {
+    public void write_background_uri (string background_uri, string lockscreen_background_uri, double home_alpha) {
         if (!css_file.query_exists ()) {
             css_file.create_async.begin (FileCreateFlags.NONE);
         }
@@ -56,8 +56,9 @@ public sealed class PhoshWallpaperD.CSSWriter: Object {
         try {
             FileUtils.set_data (
                 css_file.get_path (),
-                css_file_template.printf (background_uri, lockscreen_background_uri).data
+                css_file_template.printf (home_alpha, background_uri, lockscreen_background_uri).data
             );
+
         } catch (FileError e) {
             warning (
                 "Error while trying write '%s'. Error message: %s",

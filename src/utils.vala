@@ -26,7 +26,7 @@ namespace PhoshWallpaperD {
 /* This file generated automatically */
 
 phosh-app-grid {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, %f);
 }
 
 phosh-home {

@@ -16,6 +16,10 @@
         URI to use for the background image. Note that the backend only supports
         local (file://) URIs.
       </description>
-    </key>        
+    </key>
+    <key name="home-alpha" type="d">
+      <default>0.5</default>
+      <!-- <summary>Home screen alpha channel</summary> -->
+    </key>
   </schema>
 </schemalist>

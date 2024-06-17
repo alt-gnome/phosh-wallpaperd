@@ -18,6 +18,7 @@
 public sealed class PhoshWallpaperD.WallpaperWatcher: Object {
 
     const string COLOR_SCHEME_PREFER_DARK = "prefer-dark";
+    const string COLOR_SCHEME_PREFER_LIGHT = "prefer-light";
     const string COLOR_SCHEME_DEFAULT = "default";
 
     string color_scheme {
@@ -67,6 +68,7 @@ public sealed class PhoshWallpaperD.WallpaperWatcher: Object {
                 break;
             
             case COLOR_SCHEME_DEFAULT:
+            case COLOR_SCHEME_PREFER_LIGHT:
                 on_light_background_changed ();
                 break;
 

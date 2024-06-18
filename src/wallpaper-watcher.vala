@@ -64,18 +64,36 @@ public sealed class PhoshWallpaperD.WallpaperWatcher: Object {
     CSSWriter css_writer = new CSSWriter (CSSType.GTK3);
 
     construct {
-        on_color_scheme_changed ();
+        update_backgrounds ();
     }
 
     void on_color_scheme_changed () {
+        print (
+            "`color-scheme` changed. New value: '%s'\n\n",
+            color_scheme
+        );
+
+        update_backgrounds ();
+    }
+
+    void on_home_alpha_changed () {
+        print (
+            "`home-alpha` changed. New value: %s\n\n",
+            home_alpha.to_string ()
+        );
+
+        update_backgrounds ();
+    }
+
+    void update_backgrounds () {
         switch (color_scheme) {
             case COLOR_SCHEME_PREFER_DARK:
-                on_dark_background_changed ();
+                change_dark_background ();
                 break;
             
             case COLOR_SCHEME_DEFAULT:
             case COLOR_SCHEME_PREFER_LIGHT:
-                on_light_background_changed ();
+                change_light_background ();
                 break;
 
             default:
@@ -85,15 +103,55 @@ public sealed class PhoshWallpaperD.WallpaperWatcher: Object {
     }
 
     void on_light_background_changed () {
-        if (color_scheme == COLOR_SCHEME_DEFAULT) {
-            change_background (picture_uri, lockscreen_picture_uri);
+        print (
+            "`picture-uri` changed. New value: '%s'\n\n",
+            picture_uri
+        );
+
+        if (color_scheme == COLOR_SCHEME_DEFAULT || color_scheme == COLOR_SCHEME_PREFER_LIGHT) {
+            change_light_background ();
         }
     }
 
-    void on_dark_background_changed () {
-        if (color_scheme == COLOR_SCHEME_PREFER_DARK) {
-            change_background (picture_uri_dark, lockscreen_picture_uri_dark);
+    void on_lockscreen_light_background_changed () {
+        print (
+            "`lockscreen-picture-uri` changed. New value: '%s'\n\n",
+            lockscreen_picture_uri
+        );
+
+        if (color_scheme == COLOR_SCHEME_DEFAULT || color_scheme == COLOR_SCHEME_PREFER_LIGHT) {
+            change_light_background ();
         }
+    }
+
+    void change_light_background () {
+        change_background (picture_uri, lockscreen_picture_uri);
+    }
+
+    void on_dark_background_changed () {
+        print (
+            "`picture-uri-dark` changed. New value: '%s'\n\n",
+            picture_uri_dark
+        );
+
+        if (color_scheme == COLOR_SCHEME_PREFER_DARK) {
+            change_dark_background ();
+        }
+    }
+
+    void on_lockscreen_dark_background_changed () {
+        print (
+            "`lockscreen-picture-uri-dark` changed. New value: '%s'\n\n",
+            lockscreen_picture_uri_dark
+        );
+
+        if (color_scheme == COLOR_SCHEME_PREFER_DARK) {
+            change_dark_background ();
+        }
+    }
+
+    void change_dark_background () {
+        change_background (picture_uri_dark, lockscreen_picture_uri_dark);
     }
 
     inline bool uri_is_valid (string uri) {
@@ -111,16 +169,16 @@ public sealed class PhoshWallpaperD.WallpaperWatcher: Object {
             return;
         }
 
-        css_writer.write_background_uri (background_uri, lockscreen_background_uri, home_alpha);
+        css_writer.write_background_uri.begin (background_uri, lockscreen_background_uri, home_alpha);
     }
 
     public void run (string[] args) {
         settings_interface.changed["color-scheme"].connect (on_color_scheme_changed);
         settings_background.changed["picture-uri"].connect (on_light_background_changed);
         settings_background.changed["picture-uri-dark"].connect (on_dark_background_changed);
-        settings_phosh_wallpaperd.changed["home-alpha"].connect (on_color_scheme_changed);
-        settings_phosh_wallpaperd.changed["lockscreen-picture-uri"].connect (on_light_background_changed);
-        settings_phosh_wallpaperd.changed["lockscreen-picture-uri-dark"].connect (on_dark_background_changed);
+        settings_phosh_wallpaperd.changed["home-alpha"].connect (on_home_alpha_changed);
+        settings_phosh_wallpaperd.changed["lockscreen-picture-uri"].connect (on_lockscreen_light_background_changed);
+        settings_phosh_wallpaperd.changed["lockscreen-picture-uri-dark"].connect (on_lockscreen_dark_background_changed);
 
         new MainLoop ().run ();
     }

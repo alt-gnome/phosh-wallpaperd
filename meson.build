@@ -4,7 +4,6 @@ project(
   version: '0.1.3',
   meson_version: '>= 0.62.0',
   license: 'GPL-3.0-only',
-  default_options: ['prefix=/usr']
 )
 
 gnome = import('gnome')

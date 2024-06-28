@@ -29,14 +29,10 @@ phosh-app-grid {
   background: rgba(0, 0, 0, %f);
 }
 
-phosh-home {
+.phosh-overview {
   background-image: url("%s");
   background-size: cover;
   background-position: center;
-}
-
-.phosh-overview {
-  background: none;
 }
 
 phosh-lockscreen, .phosh-lockshield {
